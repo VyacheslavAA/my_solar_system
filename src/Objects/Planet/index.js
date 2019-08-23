@@ -1,18 +1,19 @@
 export default class Planet {
   ctx;
   canvasEl;
-  x = 0;
-  y = 0;
-  initialX = 0;
-  initialY = 0;
-  radian = 0;
-  speed = 0;
-  radius = 0;
-  image = '';
-  zIndex = 0;
+  x;
+  y;
+  initialX;
+  initialY;
+  radian;
+  speed;
+  radius;
+  image;
+  zIndex;
   planetWidth;
   planetHeight;
-  planetMinWidth = 45;
+  initialPlanetWidth;
+  initialPlanetHeight;
   isSun;
 
   constructor({context, canvasEl, x, y, radius, speed, radian, image, zIndex, planetWidth, planetHeight, isSun}) {
@@ -28,31 +29,43 @@ export default class Planet {
     this.image = image;
     this.zIndex = zIndex;
     this.planetWidth = planetWidth;
-    this.planetHeight = planetHeight
+    this.planetHeight = planetHeight;
+    this.initialPlanetWidth = planetWidth;
+    this.initialPlanetHeight = planetHeight;
     this.isSun = isSun;
   }
 
   drawPlanet = () => {
-    const coordX = this.x - (this.planetWidth / 2);
-    const coordY = this.y - (this.planetHeight / 2);
-    this.ctx.drawImage(this.image, coordX, coordY, this.planetWidth, this.planetHeight);
+    const coordinateX = this.x - (this.planetWidth / 2);
+    const coordinateY = this.y - (this.planetHeight / 2);
+    this.ctx.drawImage(this.image, coordinateX, coordinateY, this.planetWidth, this.planetHeight);
   };
 
-  updateCoord = () => {
+  update = () => {
     this.radian += this.speed;
+    const sin = Math.sin(this.radian);
+    const cos = Math.cos(this.radian);
+    const trajectoryDiameter = this.radius * 2;
 
-    if (Math.sin(this.radian) < 0 && this.zIndex > 0 ||
-      Math.sin(this.radian) > 0 && this.zIndex < 0) {
+    if (sin < 0 && this.zIndex > 0 ||
+      sin > 0 && this.zIndex < 0) {
       this.zIndex = -this.zIndex;
     }
 
     if (!this.isSun) {
-      this.planetHeight += Math.cos(this.radian) * 0.2;
-      this.planetWidth += Math.cos(this.radian) * 0.2;
+      const path = trajectoryDiameter - (this.radius * sin + this.radius);
+      const pathPercent = (100 * path) / trajectoryDiameter;
+      const scale = (pathPercent * this.initialPlanetWidth) / 115;
+
+      this.planetHeight = this.initialPlanetHeight - scale;
+      this.planetWidth = this.initialPlanetWidth - scale;
     }
 
-    this.x = this.initialX + Math.cos(this.radian) * this.radius * 6;
-    this.y = this.initialY + Math.sin(this.radian) * this.radius;
+    // this.planetWidth = this.initialPlanetWidth / 1.5;
+    // this.planetHeight = this.initialPlanetHeight / 1.5;
+
+    this.x = this.initialX + cos * this.radius * 2.5;
+    this.y = this.initialY + sin * this.radius;
 
     this.drawPlanet();
   };

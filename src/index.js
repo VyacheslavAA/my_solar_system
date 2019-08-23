@@ -19,9 +19,9 @@ let planets = [];
 
 images.forEach((image, idx) => {
   const zIndex = idx;
-  const speed = (10 - idx) * 0.0015;
-  const planetHeight = idx === 0 ? 150 : 75;
-  const planetWidth = idx === 0 ? 150 : 75;
+  const speed = (10 - idx) * 0.001;
+  const planetHeight = idx === 0 ? 100 : 55;
+  const planetWidth = idx === 0 ? 100 : 55;
   const isSun = idx === 0 ? true : false;
 
   planets.push(new Planet({
@@ -35,14 +35,14 @@ images.forEach((image, idx) => {
   }));
 
   planetSettings.radian *= getRandomInt(0, 2 * Math.PI);
-  planetSettings.radius += 20;
+  planetSettings.radius += 60;
 });
 
 const animation = () => {
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
   planets.sort((prevPlanet, nextPlanet) => prevPlanet.zIndex - nextPlanet.zIndex);
-  planets.forEach(planet => planet.updateCoord());
+  planets.forEach(planet => planet.update());
 
   requestAnimationFrame(animation);
 };

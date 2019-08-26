@@ -8,6 +8,62 @@
   <title>My solar system</title>
 </head>
 <body>
+<form class="settingsForm">
+  <div class="settingsForm__field">
+    <input type="number"
+           name="width"
+           placeholder="Planet width">
+  </div>
+
+  <div class="settingsForm__field">
+    <input type="number"
+           name="height"
+           placeholder="Planet height">
+  </div>
+
+  <div class="settingsForm__field">
+    <input type="number"
+           name="radius"
+           placeholder="Radius of trajectory">
+  </div>
+
+  <div class="settingsForm__checkbox">
+    <label for="is3d">
+      <input type="checkbox"
+             hidden
+             id="is3d"
+             name="is3d"
+             checked>
+
+      <span class="customCheckbox">
+        <span class="customCheckbox__on">on</span>
+        <span class="customCheckbox__toggle"></span>
+        <span class="customCheckbox__off">off</span>
+      </span>
+
+      <span class="labelText">3D mod</span>
+    </label>
+  </div>
+
+  <div class="settingsForm__checkbox">
+    <label for="path">
+      <input type="checkbox"
+             hidden
+             id="path"
+             disabled
+             name="path">
+
+      <span class="customCheckbox customCheckbox--disabled">
+        <span class="customCheckbox__on">on</span>
+        <span class="customCheckbox__toggle"></span>
+        <span class="customCheckbox__off">off</span>
+      </span>
+
+      <span class="labelText">Path</span>
+    </label>
+  </div>
+</form>
+
 <canvas id="canvas"></canvas>
 </body>
 </html>

@@ -1,5 +1,9 @@
+html * {
+  box-sizing: border-box;
+}
+
 body {
-  background-image: url('./../../assets/images/01_SPoW_051119.jpg');
+  position: relative;
   background-size: cover;
   background-position: center;
   padding: 0;

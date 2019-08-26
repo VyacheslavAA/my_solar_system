@@ -1,0 +1,90 @@
+.settingsForm {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  border: 1px solid #707070;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  opacity: .3;
+  transition: all .8s ease;
+  background-color: rgba(18, 18, 18, .9);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.settingsForm__field input {
+  width: 100%;
+  background-color: transparent;
+  margin-bottom: 10px;
+  color: #707070;
+  border: 1px solid #707070;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+
+.settingsForm__checkbox label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  max-width: 60px;
+  border: 1px solid #707070;
+  border-radius: 15px;
+}
+
+.customCheckbox__on,
+.customCheckbox__off {
+  color: #707070;
+  padding: 2px 5px;
+}
+
+.settingsForm__checkbox input:checked + .customCheckbox > .customCheckbox__toggle {
+  transform: translateX(0);
+}
+
+.customCheckbox__toggle {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 50%;
+  height: calc(100% - 6px);
+  border: 1px solid #707070;
+  border-radius: 15px;
+  background-color: #121212;
+  transform: translateX(calc(100% - 6px));
+  transition: all .4s ease;
+}
+
+.labelText {
+  color: #707070;
+}
+
+.settingsForm__checkbox:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.customCheckbox--disabled {
+  cursor: not-allowed;
+}

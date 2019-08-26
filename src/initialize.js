@@ -1,5 +1,3 @@
-import setElementSize from './eventHandlers/setElementSize';
-
 const initialize = () => {
   const canvasEl = document.getElementById('canvas');
   const width = window.innerWidth;
@@ -8,8 +6,6 @@ const initialize = () => {
 
   canvasEl.width = width;
   canvasEl.height = height;
-
-  window.addEventListener('resize', (evt) => setElementSize(evt, canvasEl));
 
   return [ctx, canvasEl];
 };

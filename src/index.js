@@ -43,7 +43,7 @@ const planetsInit = (newPlanetParameters) => {
     const speed = (10 - idx) * 0.001;
     const planetHeight = idx === 0 ? planetParameters.width * 3 : planetParameters.height;
     const planetWidth = idx === 0 ? planetParameters.width * 3 : planetParameters.width;
-    const isSun = idx === 0 ? true : false;
+    const isSun = idx === 0;
 
     planets.push(new Planet({
       ...planetSettings,

@@ -9,7 +9,7 @@ export default class Planet {
     this.canvasEl = canvasEl;
     this.radius = radius;
     this.radian = radian;
-    this.image = image;
+    this.texture = image;
     this.zIndex = zIndex;
     this.planetWidth = planetWidth;
     this.planetHeight = planetHeight;
@@ -23,7 +23,7 @@ export default class Planet {
   drawPlanet = () => {
     const coordinateX = this.x - (this.planetWidth / 2);
     const coordinateY = this.y - (this.planetHeight / 2);
-    this.ctx.drawImage(this.image, coordinateX, coordinateY, this.planetWidth, this.planetHeight);
+    this.ctx.drawImage(this.texture, coordinateX, coordinateY, this.planetWidth, this.planetHeight);
   };
 
   drawPath = () => {

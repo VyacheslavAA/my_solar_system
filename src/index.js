@@ -1,6 +1,6 @@
 import initialize from './initialize';
-import Planet from './Objects/Planet';
-import Star from './Objects/Star';
+import Planet from './objects/Planet';
+import Star from './objects/Star';
 import getRandomInt from './utils/getRandomInt';
 import getImages from './utils/getImages';
 import setElementSize from './eventHandlers/setElementSize';
@@ -10,7 +10,7 @@ import './../assets/styles/main.scss';
 
 const [context, canvasEl] = initialize();
 const images = getImages();
-const inputEl = document.querySelectorAll('input');
+const inputElements = document.querySelectorAll('input');
 let planetParameters = {
   width: 55,
   height: 55,
@@ -64,36 +64,37 @@ const planetsInit = (newPlanetParameters) => {
 
 const starsInit = () => {
   const starsCount = 600;
+  const numberOfStarGroups = 3;
+  const nearStars = [];
+  const mediumStars = [];
+  const farStars = [];
   const colors = ['#0952BD', '#A5BFF0', '#118CD6'];
-  let nearStars = [];
-  let mediumStars = [];
-  let farStars = [];
 
-  for(let i = 0; i < starsCount / 3; i++) {
-    const xPos = getRandomInt(0, canvasEl.offsetWidth);
-    const yPos = getRandomInt(0, canvasEl.offsetHeight);
+  for(let currentStarGroup = 0; currentStarGroup < numberOfStarGroups; currentStarGroup++) {
+    let howFarStar;
 
-    farStars.push(
-      new Star(context, canvasEl, xPos, yPos, colors[0], 1)
-    );
-  }
+    switch (currentStarGroup) {
+      case 0:
+        howFarStar = 1;
+        break;
 
-  for(let i = 0; i < starsCount / 3; i++) {
-    const xPos = getRandomInt(0, canvasEl.offsetWidth);
-    const yPos = getRandomInt(0, canvasEl.offsetHeight);
+      case 2:
+        howFarStar = 1.5;
+        break;
 
-    mediumStars.push(
-      new Star(context, canvasEl, xPos, yPos, colors[1], 1.5)
-    );
-  }
+      case 3:
+        howFarStar = 2;
+        break;
+    }
 
-  for(let i = 0; i < starsCount / 3; i++) {
-    const xPos = getRandomInt(0, canvasEl.offsetWidth);
-    const yPos = getRandomInt(0, canvasEl.offsetHeight);
-
-    nearStars.push(
-      new Star(context, canvasEl, xPos, yPos, colors[2], 2)
-    );
+    for(let i = 0; i < starsCount / numberOfStarGroups; i++) {
+      const xPos = getRandomInt(0, canvasEl.offsetWidth);
+      const yPos = getRandomInt(0, canvasEl.offsetHeight);
+  
+      farStars.push(
+        new Star(context, canvasEl, xPos, yPos, colors[currentStarGroup], howFarStar)
+      );
+    }
   }
 
   stars = [
@@ -129,8 +130,8 @@ const animation = () => {
 
 window.addEventListener('resize', (evt) => setElementSize(evt, canvasEl, initObjects));
 
-for(let i = 0; i < inputEl.length; i++) {
-  inputEl[i].addEventListener('input', (evt) => inputCheck(evt, planetsInit));
+for(let i = 0; i < inputElements.length; i++) {
+  inputElements[i].addEventListener('input', (evt) => inputCheck(evt, planetsInit));
 }
 
 initObjects();

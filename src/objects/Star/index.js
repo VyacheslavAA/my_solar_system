@@ -1,18 +1,18 @@
-import getRandomInt from './../../utils/getRandomInt';
+import getRandomInt from '../../utils/getRandomInt';
 
 export default class Star {
-  constructor(ctx, canvasEl, xPos, yPos, color, howStarFar) {
+  constructor(ctx, canvasEl, xPos, yPos, color, howFarStar) {
     this.ctx = ctx;
     this.canvasEl = canvasEl;
     this.color = color;
     this.xPos = xPos;
     this.yPos = yPos;
-    this.howStarFar = howStarFar;
-    this.starWidth = howStarFar;
-    this.starHeight = howStarFar;
+    this.howFarStar = howFarStar;
+    this.starWidth = howFarStar;
+    this.starHeight = howFarStar;
     this.speed = 0;
 
-    switch (howStarFar) {
+    switch (howFarStar) {
       case 1:
         this.speed = 0.003;
         break;
@@ -36,13 +36,14 @@ export default class Star {
   update = () => {
     const heightOfCanvas = this.canvasEl.offsetHeight;
     const widthOfCanvas = this.canvasEl.offsetWidth;
+    const shouldStarFlicker = getRandomInt(0, 1000);
 
-    if (getRandomInt(0, 1000) > 990) {
-      this.starHeight = this.howStarFar / 2;
-      this.starWidth = this.howStarFar / 2;
-    } else if (getRandomInt(0, 1000) < 10) {
-      this.starHeight = this.howStarFar;
-      this.starWidth = this.howStarFar;
+    if (shouldStarFlicker > 990) {
+      this.starHeight = this.howFarStar / 2;
+      this.starWidth = this.howFarStar / 2;
+    } else if (shouldStarFlicker < 10) {
+      this.starHeight = this.howFarStar;
+      this.starWidth = this.howFarStar;
     }
 
     this.yPos += this.speed;
